@@ -1,17 +1,19 @@
 package ru.sbt.mipt.oop;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import ru.sbt.mipt.oop.output.FileWriter;
+import ru.sbt.mipt.oop.output.HomeUnloader;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collections;
 
 public class HomeBuilder {
+    public final HomeUnloader homeUnloader;
+
+    public HomeBuilder(HomeUnloader homeUnloader) {
+        this.homeUnloader = homeUnloader;
+    }
+
     private SmartHome generateSmartHomeObject(){
         Room kitchen = new Room(Arrays.asList(new Light("1", false), new Light("2", true)),
                 Collections.singletonList(new Door(false, "1")),
@@ -28,11 +30,10 @@ public class HomeBuilder {
         return new SmartHome(Arrays.asList(kitchen, bathroom, bedroom, hall));
     }
     public static void main(String[] args) throws IOException {
-        HomeBuilder homeBuilder = new HomeBuilder();
-        FileWriter fileWriter = new FileWriter("smart-home-1.js");
-
+        HomeUnloader homeUnloader = new FileWriter("smart-home-1.js");
+        HomeBuilder homeBuilder = new HomeBuilder(homeUnloader);
         SmartHome smartHome = homeBuilder.generateSmartHomeObject();
-        fileWriter.saveObjectInJSONFile(smartHome);
+        homeUnloader.unloadHome(smartHome);
 
     }
 

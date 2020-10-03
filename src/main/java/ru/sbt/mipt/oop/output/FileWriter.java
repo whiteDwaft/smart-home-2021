@@ -1,4 +1,4 @@
-package ru.sbt.mipt.oop;
+package ru.sbt.mipt.oop.output;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -9,14 +9,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-class FileWriter {
+public class FileWriter implements HomeUnloader {
     private final String filename;
 
-    FileWriter(String filename) {
+    public FileWriter(String filename) {
         this.filename = filename;
     }
-
-    void saveObjectInJSONFile(Object object){
+    @Override
+    public void unloadHome(Object object) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String jsonString = gson.toJson(object);
         System.out.println(jsonString);
