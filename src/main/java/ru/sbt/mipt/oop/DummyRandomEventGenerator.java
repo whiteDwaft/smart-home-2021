@@ -1,6 +1,6 @@
 package ru.sbt.mipt.oop;
 
-class SensorEventGeneratorImpl implements SensorEventGenerator {
+class DummyRandomEventGenerator implements SensorEventGenerator {
 
     @Override
     public SensorEvent getNextSensorEvent() {

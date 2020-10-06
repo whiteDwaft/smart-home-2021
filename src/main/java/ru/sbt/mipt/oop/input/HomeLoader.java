@@ -6,5 +6,5 @@ import java.io.IOException;
 
 public interface HomeLoader {
 
-    SmartHome loadFromFile() throws IOException;
+    SmartHome loadFromFile();
 }

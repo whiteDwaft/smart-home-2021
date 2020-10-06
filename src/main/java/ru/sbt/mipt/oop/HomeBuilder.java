@@ -14,7 +14,7 @@ public class HomeBuilder {
         this.homeUnloader = homeUnloader;
     }
 
-    private SmartHome generateSmartHomeObject(){
+    public SmartHome generateSmartHomeObject(){
         Room kitchen = new Room(Arrays.asList(new Light("1", false), new Light("2", true)),
                 Collections.singletonList(new Door(false, "1")),
                 "kitchen");
