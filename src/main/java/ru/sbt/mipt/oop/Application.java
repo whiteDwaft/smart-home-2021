@@ -14,17 +14,17 @@ public class Application {
 
     private final HomeLoader homeLoader;
     private SmartHome smartHome;
-    private final Simulating simulating;
+    private final LoopEventGenerator simulating;
 
 
-    public Application(HomeLoader homeLoader, Simulating simulating) {
+    public Application(HomeLoader homeLoader, LoopEventGenerator simulating) {
         this.homeLoader = homeLoader;
         this.simulating = simulating;
     }
 
     public static void main(String... args) throws IOException {
         Application application = new Application(new FileReader("smart-home-1.js"),
-                new Simulating(new DummyRandomEventGenerator(), Arrays.asList(new DoorEventHandler(), new LightEventHandler(), new HallDoorEventHandler())));
+                new LoopEventGenerator(new DummyRandomEventGenerator(), Arrays.asList(new DoorEventHandler(), new LightEventHandler(), new HallDoorEventHandler(sensorEvent))));
         application.smartHome = application.homeLoader.loadFromFile();
         application.run();
     }
