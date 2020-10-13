@@ -24,7 +24,7 @@ public class Application {
 
     public static void main(String... args) throws IOException {
         Application application = new Application(new FileReader("smart-home-1.js"),
-                new LoopEventGenerator(new DummyRandomEventGenerator(), Arrays.asList(new DoorEventHandler(), new LightEventHandler(), new HallDoorEventHandler(sensorEvent))));
+                new LoopEventGenerator(new DummyRandomEventGenerator(), Arrays.asList(new DoorEventHandler(), new LightEventHandler(), new HallDoorEventHandler())));
         application.smartHome = application.homeLoader.loadFromFile();
         application.run();
     }
