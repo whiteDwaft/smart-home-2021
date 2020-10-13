@@ -12,13 +12,13 @@ public class DoorEventHandler implements EventHandler {
     @Override
     public void handle(SensorEvent event, SmartHome smartHome) {
         smartHome.execute(event);
-        SensorCommand sensorCommand;
-        if (event.getType() == DOOR_OPEN) {
-            sensorCommand = new SensorCommand(CommandType.DOOR_OPEN, event.getObjectId());
-        } else {
-            sensorCommand = new SensorCommand(CommandType.DOOR_CLOSED, event.getObjectId());
-        }
-        commandSender.sendCommand(sensorCommand);
+//        SensorCommand sensorCommand;
+//        if (event.getType() == DOOR_OPEN) {
+//            sensorCommand = new SensorCommand(CommandType.DOOR_OPEN, event.getObjectId());
+//        } else {
+//            sensorCommand = new SensorCommand(CommandType.DOOR_CLOSED, event.getObjectId());
+//        }
+//        commandSender.sendCommand(sensorCommand);
 //        for (Room room : smartHome.getRooms()) {
 //            for (Door door : room.getDoors()) {
 //                if (door.getId().equals(event.getObjectId())) {
