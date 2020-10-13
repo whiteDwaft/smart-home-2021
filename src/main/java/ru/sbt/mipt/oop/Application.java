@@ -12,22 +12,23 @@ import java.util.Arrays;
 public class Application {
 
     private final HomeLoader homeLoader;
-    private final SmartHome smartHome;
+    private SmartHome smartHome;
     private final Simulating simulating;
 
 
-    public Application(HomeLoader homeLoader,Simulating simulating) throws IOException {
+    public Application(HomeLoader homeLoader, Simulating simulating) {
         this.homeLoader = homeLoader;
-        smartHome = this.homeLoader.loadFromFile();
         this.simulating = simulating;
     }
+
     public static void main(String... args) throws IOException {
         Application application = new Application(new FileReader("smart-home-1.js"),
-                new Simulating(new DummyRandomEventGenerator(), Arrays.asList(new DoorEventHandler(),new LightEventHandler())));
-
+                new Simulating(new DummyRandomEventGenerator(), Arrays.asList(new DoorEventHandler(), new LightEventHandler())));
+        application.smartHome = application.homeLoader.loadFromFile();
         application.run();
     }
-    public void run(){
+
+    public void run() {
         simulating.simulating(smartHome);
     }
 }
