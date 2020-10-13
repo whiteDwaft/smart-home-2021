@@ -25,7 +25,7 @@ class LightTest {
     void execute() {
         SensorEvent event = new SensorEvent(SensorEventType.LIGHT_ON, "" + 1);
         Light light = new Light("" + 1,false);
-        light.execute(event);
+        light.executeOne(event);
         boolean res = light.isOn();
         assertTrue(res,"light must be switched on");
     }

@@ -1,5 +1,6 @@
 package ru.sbt.mipt.oop;
 
+import ru.sbt.mipt.oop.alarm.Signalization;
 import ru.sbt.mipt.oop.output.FileWriter;
 import ru.sbt.mipt.oop.output.HomeUnloader;
 
@@ -27,7 +28,7 @@ public class HomeBuilder {
         Room hall = new Room(Arrays.asList(new Light("7", false), new Light("8", false), new Light("9", false)),
                 Collections.singletonList(new Door(false, "4")),
                 "hall");
-        return new SmartHome(Arrays.asList(kitchen, bathroom, bedroom, hall));
+        return new SmartHome(Arrays.asList(kitchen, bathroom, bedroom, hall),123);
     }
     public static void main(String[] args) throws IOException {
         HomeUnloader homeUnloader = new FileWriter("smart-home-1.js");

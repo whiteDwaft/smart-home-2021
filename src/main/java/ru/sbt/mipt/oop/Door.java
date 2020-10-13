@@ -41,7 +41,7 @@ public class Door implements Action {
     }
 
     @Override
-    public void execute(SensorEvent event) {
+    public void executeOne(SensorEvent event) {
         if (getId().equals(event.getObjectId())) {
             if (event.getType() == DOOR_OPEN) {
                 setOpen(true);
@@ -51,6 +51,18 @@ public class Door implements Action {
                 setOpen(false);
                 System.out.println("Door " + getId() + " was closed.");
             }
+        }
+    }
+
+    @Override
+    public void executeAll(SensorEvent event) {
+        if (event.getType() == DOOR_OPEN) {
+            setOpen(true);
+            System.out.println("Door " + getId() + " was opened.");
+
+        } else {
+            setOpen(false);
+            System.out.println("Door " + getId() + " was closed.");
         }
     }
 }

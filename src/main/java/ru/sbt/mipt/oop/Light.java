@@ -40,7 +40,7 @@ public class Light implements Action {
     }
 
     @Override
-    public void execute(SensorEvent event) {
+    public void executeOne(SensorEvent event) {
         if (getId().equals(event.getObjectId())) {
             if (event.getType() == LIGHT_ON) {
                 setOn(true);
@@ -49,6 +49,17 @@ public class Light implements Action {
                 setOn(false);
                 System.out.println("Light " + getId() + " was turned off.");
             }
+        }
+    }
+
+    @Override
+    public void executeAll(SensorEvent event) {
+        if (event.getType() == LIGHT_ON) {
+            setOn(true);
+            System.out.println("Light " + getId() + " was turned on.");
+        } else {
+            setOn(false);
+            System.out.println("Light " + getId() + " was turned off.");
         }
     }
 }

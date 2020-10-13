@@ -52,25 +52,35 @@ public class Room implements Action {
     }
 
     @Override
-    public void execute(SensorEvent event) {
+    public void executeOne(SensorEvent event) {
         if (event.getType() == LIGHT_ON || event.getType() == LIGHT_OFF) {
             LightIteratorCollection lightIteratorCollection = new LightIteratorCollectionImpl(lights);
             LightIterator lightIterator = lightIteratorCollection.createIterator(-1);
             while (lightIterator.hasMore()) {
-                lightIterator.getNext().execute(event);
+                lightIterator.getNext().executeOne(event);
             }
-        } else {
+        } else if ((event.getType() == DOOR_OPEN || event.getType() == DOOR_CLOSED)) {
             DoorIteratorCollection doorIteratorCollection = new DoorIteratorCollectionImpl(doors);
             DoorIterator doorIterator = doorIteratorCollection.createIterator(-1);
             while (doorIterator.hasMore()) {
-                doorIterator.getNext().execute(event);
+                doorIterator.getNext().executeOne(event);
             }
-            if(getName().equals("hall") && doors.stream().noneMatch(Door::isOpen)){
-                LightIteratorCollection lightIteratorCollection = new LightIteratorCollectionImpl(lights);
-                LightIterator lightIterator = lightIteratorCollection.createIterator(-1);
-                while (lightIterator.hasMore()) {
-                    lightIterator.getNext().setOn(false);
-                }
+        }
+    }
+
+    @Override
+    public void executeAll(SensorEvent event) {
+        if (event.getType() == LIGHT_ON || event.getType() == LIGHT_OFF) {
+            LightIteratorCollection lightIteratorCollection = new LightIteratorCollectionImpl(lights);
+            LightIterator lightIterator = lightIteratorCollection.createIterator(-1);
+            while (lightIterator.hasMore()) {
+                lightIterator.getNext().executeAll(event);
+            }
+        } else if ((event.getType() == DOOR_OPEN || event.getType() == DOOR_CLOSED)) {
+            DoorIteratorCollection doorIteratorCollection = new DoorIteratorCollectionImpl(doors);
+            DoorIterator doorIterator = doorIteratorCollection.createIterator(-1);
+            while (doorIterator.hasMore()) {
+                doorIterator.getNext().executeAll(event);
             }
         }
     }

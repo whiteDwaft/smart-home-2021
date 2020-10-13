@@ -1,5 +1,6 @@
 package ru.sbt.mipt.oop;
 
 public interface Action {
-    void execute(SensorEvent sensorEvent);
+    void executeOne(SensorEvent sensorEvent);
+    void executeAll(SensorEvent sensorEvent);
 }

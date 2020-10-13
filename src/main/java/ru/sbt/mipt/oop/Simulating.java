@@ -1,10 +1,9 @@
 package ru.sbt.mipt.oop;
 
+import ru.sbt.mipt.oop.handlers.DecorateEventHandler;
 import ru.sbt.mipt.oop.handlers.EventHandler;
 
 import java.util.List;
-
-import static ru.sbt.mipt.oop.SensorEventType.*;
 
 public class Simulating {
     private final SensorEventGenerator sensorEventGenerator;
@@ -20,7 +19,12 @@ public class Simulating {
         SensorEvent event = sensorEventGenerator.getNextSensorEvent();
         while (event != null){
             SensorEvent finalEvent = event;
-            eventHandlers.forEach(it -> it.handle(finalEvent,smartHome));
+            for(EventHandler it:eventHandlers){
+                EventHandler eventHandler = new DecorateEventHandler(it);
+                if(eventHandler.handle(finalEvent,smartHome)){
+                    break;
+                }
+            };
             event = sensorEventGenerator.getNextSensorEvent();
         }
     }

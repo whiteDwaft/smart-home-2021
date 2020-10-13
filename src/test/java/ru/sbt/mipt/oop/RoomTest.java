@@ -15,7 +15,7 @@ class RoomTest {
         List<Light> lights = new ArrayList<>();
         lights.add(new Light(""+1,false));
         Room room = new Room(lights,new ArrayList<>(),"room");
-        room.execute(event);
+        room.executeOne(event);
         boolean res = lights.get(0).isOn();
         assertTrue(res,"light must be switch on");
     }
@@ -25,7 +25,7 @@ class RoomTest {
         List<Door> doors = new ArrayList<>();
         doors.add(new Door(false,""+1));
         Room room = new Room(new ArrayList<>(),doors,"room");
-        room.execute(event);
+        room.executeOne(event);
         boolean res = doors.get(0).isOpen();
         assertTrue(res,"light must be switch on");
     }

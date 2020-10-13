@@ -25,7 +25,7 @@ class DoorTest {
     void execute() {
         SensorEvent event = new SensorEvent(SensorEventType.DOOR_OPEN, "" + 1);
         Door door = new Door(false,"" +1);
-        door.execute(event);
+        door.executeOne(event);
         boolean res = door.isOpen();
         assertTrue(res,"door must be open");
     }

@@ -1,21 +1,27 @@
 package ru.sbt.mipt.oop.handlers;
 
 import ru.sbt.mipt.oop.*;
+
+import static ru.sbt.mipt.oop.SensorEventType.LIGHT_OFF;
 import static ru.sbt.mipt.oop.SensorEventType.LIGHT_ON;
 
 public class LightEventHandler  implements EventHandler {
     private final CommandSender commandSender = new CommandSenderImpl();
 
     @Override
-    public void handle(SensorEvent event, SmartHome smartHome) {
-        smartHome.execute(event);
-        SensorCommand sensorCommand;
-        if (event.getType() == LIGHT_ON) {
-            sensorCommand = new SensorCommand(CommandType.Light_ON, event.getObjectId());
-        } else {
-            sensorCommand = new SensorCommand(CommandType.LIGHT_OFF, event.getObjectId());
+    public boolean handle(SensorEvent event, SmartHome smartHome) {
+        if( event.getType() == LIGHT_ON || event.getType() == LIGHT_OFF) {
+            smartHome.executeOne(event);
+            SensorCommand sensorCommand;
+            if (event.getType() == LIGHT_ON) {
+                sensorCommand = new SensorCommand(CommandType.Light_ON, event.getObjectId());
+            } else {
+                sensorCommand = new SensorCommand(CommandType.LIGHT_OFF, event.getObjectId());
+            }
+            commandSender.sendCommand(sensorCommand);
+            return true;
         }
-        commandSender.sendCommand(sensorCommand);
+        return false;
 //        for (Room room : smartHome.getRooms()) {
 //            for (Light light : room.getLights()) {
 //                if (light.getId().equals(event.getObjectId())) {
