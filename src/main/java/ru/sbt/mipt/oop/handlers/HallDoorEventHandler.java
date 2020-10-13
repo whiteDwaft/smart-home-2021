@@ -4,10 +4,7 @@ import ru.sbt.mipt.oop.*;
 
 public class HallDoorEventHandler implements EventHandler {
     private final CommandSender commandSender;
-    private final SensorCommand sensorCommand;
-
-    public HallDoorEventHandler(SensorCommand sensorCommand) {
-        this.sensorCommand = sensorCommand;
+    public HallDoorEventHandler() {
         this.commandSender = new CommandSenderImpl();;
     }
 
