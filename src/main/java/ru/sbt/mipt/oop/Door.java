@@ -4,7 +4,7 @@ import java.util.Objects;
 
 import static ru.sbt.mipt.oop.SensorEventType.DOOR_OPEN;
 
-public class Door implements Action {
+public class Door implements Actionable {
     private final String id;
 
     public boolean isOpen() {
@@ -41,29 +41,8 @@ public class Door implements Action {
     }
 
     @Override
-    public void executeOne(SensorEvent event) {
-        if (getId().equals(event.getObjectId())) {
-            if (event.getType() == DOOR_OPEN) {
-                setOpen(true);
-                System.out.println("Door " + getId() + " was opened.");
-
-            } else {
-                setOpen(false);
-                System.out.println("Door " + getId() + " was closed.");
-            }
-        }
-    }
-
-    @Override
-    public void executeAll(SensorEvent event) {
-        if (event.getType() == DOOR_OPEN) {
-            setOpen(true);
-            System.out.println("Door " + getId() + " was opened.");
-
-        } else {
-            setOpen(false);
-            System.out.println("Door " + getId() + " was closed.");
-        }
+    public void execute(Action action) {
+        action.accept(this);
     }
 }
 

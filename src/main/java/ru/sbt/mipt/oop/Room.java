@@ -13,7 +13,7 @@ import java.util.Objects;
 
 import static ru.sbt.mipt.oop.SensorEventType.*;
 
-public class Room implements Action {
+public class Room implements Actionable {
     private List<Light> lights;
     private List<Door> doors;
     private String name;
@@ -52,36 +52,19 @@ public class Room implements Action {
     }
 
     @Override
-    public void executeOne(SensorEvent event) {
-        if (event.getType() == LIGHT_ON || event.getType() == LIGHT_OFF) {
-            LightIteratorCollection lightIteratorCollection = new LightIteratorCollectionImpl(lights);
-            LightIterator lightIterator = lightIteratorCollection.createIterator(-1);
-            while (lightIterator.hasMore()) {
-                lightIterator.getNext().executeOne(event);
-            }
-        } else if ((event.getType() == DOOR_OPEN || event.getType() == DOOR_CLOSED)) {
-            DoorIteratorCollection doorIteratorCollection = new DoorIteratorCollectionImpl(doors);
-            DoorIterator doorIterator = doorIteratorCollection.createIterator(-1);
-            while (doorIterator.hasMore()) {
-                doorIterator.getNext().executeOne(event);
-            }
-        }
-    }
+    public void execute(Action action) {
+        action.accept(this);
 
-    @Override
-    public void executeAll(SensorEvent event) {
-        if (event.getType() == LIGHT_ON || event.getType() == LIGHT_OFF) {
-            LightIteratorCollection lightIteratorCollection = new LightIteratorCollectionImpl(lights);
-            LightIterator lightIterator = lightIteratorCollection.createIterator(-1);
-            while (lightIterator.hasMore()) {
-                lightIterator.getNext().executeAll(event);
-            }
-        } else if ((event.getType() == DOOR_OPEN || event.getType() == DOOR_CLOSED)) {
-            DoorIteratorCollection doorIteratorCollection = new DoorIteratorCollectionImpl(doors);
-            DoorIterator doorIterator = doorIteratorCollection.createIterator(-1);
-            while (doorIterator.hasMore()) {
-                doorIterator.getNext().executeAll(event);
-            }
+        LightIteratorCollection lightIteratorCollection = new LightIteratorCollectionImpl(lights);
+        LightIterator lightIterator = lightIteratorCollection.createIterator(-1);
+        while (lightIterator.hasMore()) {
+            lightIterator.getNext().execute(action);
+        }
+
+        DoorIteratorCollection doorIteratorCollection = new DoorIteratorCollectionImpl(doors);
+        DoorIterator doorIterator = doorIteratorCollection.createIterator(-1);
+        while (doorIterator.hasMore()) {
+            doorIterator.getNext().execute(action);
         }
     }
 }

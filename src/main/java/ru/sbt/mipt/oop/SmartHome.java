@@ -10,12 +10,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
-import static ru.sbt.mipt.oop.SensorEventType.DOOR_CLOSED;
-import static ru.sbt.mipt.oop.SensorEventType.DOOR_OPEN;
-
 //хотел добавть в SmartHome объект Signalisation, но при формировании объекта через JSON происходит StackOverflow
 //(Signalization ссылвется на SignalizationState, а SignalizationState ссылается на Signalization (циклическая ссылка))
-public class SmartHome  implements Action {
+public class SmartHome  implements Actionable {
     List<Room> rooms;
     private final int PIN;
     private Signalization signalization;
@@ -51,34 +48,21 @@ public class SmartHome  implements Action {
         return Objects.hash(rooms);
     }
 
-    public void addRoom(Room room) {
-        rooms.add(room);
-    }
-
     public Collection<Room> getRooms() {
         return rooms;
     }
 
 
     @Override
-    public void executeOne(SensorEvent event) {
+    public void execute(Action action) {
+
+        action.accept(this);
+
         RoomIteratorCollection roomIteratorCollection = new RoomIteratorCollectionImpl(rooms);
         RoomIterator roomIterator = roomIteratorCollection.createIterator(-1);
         while (roomIterator.hasMore())
         {
-            roomIterator.getNext().executeOne(event);
-
-        }
-    }
-
-    @Override
-    public void executeAll(SensorEvent event) {
-        RoomIteratorCollection roomIteratorCollection = new RoomIteratorCollectionImpl(rooms);
-        RoomIterator roomIterator = roomIteratorCollection.createIterator(-1);
-        while (roomIterator.hasMore())
-        {
-            roomIterator.getNext().executeAll(event);
-
+            roomIterator.getNext().execute(action);
         }
     }
 }

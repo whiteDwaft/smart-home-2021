@@ -4,7 +4,7 @@ import java.util.Objects;
 
 import static ru.sbt.mipt.oop.SensorEventType.LIGHT_ON;
 
-public class Light implements Action {
+public class Light implements Actionable {
     private boolean isOn;
     private final String id;
 
@@ -40,26 +40,8 @@ public class Light implements Action {
     }
 
     @Override
-    public void executeOne(SensorEvent event) {
-        if (getId().equals(event.getObjectId())) {
-            if (event.getType() == LIGHT_ON) {
-                setOn(true);
-                System.out.println("Light " + getId() + " was turned on.");
-            } else {
-                setOn(false);
-                System.out.println("Light " + getId() + " was turned off.");
-            }
-        }
+    public void execute(Action action) {
+        action.accept(this);
     }
 
-    @Override
-    public void executeAll(SensorEvent event) {
-        if (event.getType() == LIGHT_ON) {
-            setOn(true);
-            System.out.println("Light " + getId() + " was turned on.");
-        } else {
-            setOn(false);
-            System.out.println("Light " + getId() + " was turned off.");
-        }
-    }
 }
