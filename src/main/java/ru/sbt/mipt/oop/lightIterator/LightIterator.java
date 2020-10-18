@@ -1,6 +1,6 @@
 package ru.sbt.mipt.oop.lightIterator;
 
-import ru.sbt.mipt.oop.Light;
+import ru.sbt.mipt.oop.elements.Light;
 
 public interface LightIterator {
     Light getNext();

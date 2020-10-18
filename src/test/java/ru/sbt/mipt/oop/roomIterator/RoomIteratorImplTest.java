@@ -1,9 +1,9 @@
 package ru.sbt.mipt.oop.roomIterator;
 
 import org.junit.jupiter.api.Test;
-import ru.sbt.mipt.oop.Door;
-import ru.sbt.mipt.oop.Light;
-import ru.sbt.mipt.oop.Room;
+import ru.sbt.mipt.oop.elements.Door;
+import ru.sbt.mipt.oop.elements.Light;
+import ru.sbt.mipt.oop.elements.Room;
 
 import java.util.ArrayList;
 import java.util.List;

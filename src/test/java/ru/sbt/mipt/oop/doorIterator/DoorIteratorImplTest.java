@@ -1,7 +1,7 @@
 package ru.sbt.mipt.oop.doorIterator;
 
 import org.junit.jupiter.api.Test;
-import ru.sbt.mipt.oop.Door;
+import ru.sbt.mipt.oop.elements.Door;
 
 import java.util.ArrayList;
 import java.util.List;

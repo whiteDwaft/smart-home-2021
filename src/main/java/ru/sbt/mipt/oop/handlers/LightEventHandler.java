@@ -1,9 +1,13 @@
 package ru.sbt.mipt.oop.handlers;
 
 import ru.sbt.mipt.oop.*;
+import ru.sbt.mipt.oop.command.CommandSender;
+import ru.sbt.mipt.oop.command.CommandSenderImpl;
+import ru.sbt.mipt.oop.elements.Light;
+import ru.sbt.mipt.oop.sensor.SensorEvent;
 
-import static ru.sbt.mipt.oop.SensorEventType.LIGHT_OFF;
-import static ru.sbt.mipt.oop.SensorEventType.LIGHT_ON;
+import static ru.sbt.mipt.oop.sensor.SensorEventType.LIGHT_OFF;
+import static ru.sbt.mipt.oop.sensor.SensorEventType.LIGHT_ON;
 
 public class LightEventHandler implements EventHandler {
     private final CommandSender commandSender = new CommandSenderImpl();

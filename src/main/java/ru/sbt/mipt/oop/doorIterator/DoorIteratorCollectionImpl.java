@@ -1,6 +1,6 @@
 package ru.sbt.mipt.oop.doorIterator;
 
-import ru.sbt.mipt.oop.Door;
+import ru.sbt.mipt.oop.elements.Door;
 
 import java.util.List;
 

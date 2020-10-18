@@ -1,11 +1,10 @@
 package ru.sbt.mipt.oop.alarm;
 
 import org.junit.jupiter.api.Test;
-import ru.sbt.mipt.oop.SensorEvent;
-import ru.sbt.mipt.oop.SensorEventType;
+import ru.sbt.mipt.oop.sensor.SensorEvent;
+import ru.sbt.mipt.oop.sensor.SensorEventType;
 import ru.sbt.mipt.oop.SmartHome;
 import ru.sbt.mipt.oop.handlers.DecorateEventHandler;
-import ru.sbt.mipt.oop.handlers.DoorEventHandler;
 import ru.sbt.mipt.oop.handlers.EventHandler;
 import ru.sbt.mipt.oop.handlers.SignalizationEventHandler;
 import ru.sbt.mipt.oop.input.FileReader;

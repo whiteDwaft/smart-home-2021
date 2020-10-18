@@ -1,5 +1,7 @@
-package ru.sbt.mipt.oop;
+package ru.sbt.mipt.oop.elements;
 
+import ru.sbt.mipt.oop.Action;
+import ru.sbt.mipt.oop.Actionable;
 import ru.sbt.mipt.oop.doorIterator.DoorIterator;
 import ru.sbt.mipt.oop.doorIterator.DoorIteratorCollection;
 import ru.sbt.mipt.oop.doorIterator.DoorIteratorCollectionImpl;
@@ -11,17 +13,19 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
-import static ru.sbt.mipt.oop.SensorEventType.*;
-
 public class Room implements Actionable {
     private List<Light> lights;
     private List<Door> doors;
     private String name;
+    private final LightIteratorCollection lightIteratorCollection;
+    private final DoorIteratorCollection doorIteratorCollection;
 
     public Room(List<Light> lights, List<Door> doors, String name) {
         this.lights = lights;
         this.doors = doors;
         this.name = name;
+        lightIteratorCollection = new LightIteratorCollectionImpl(lights);
+        doorIteratorCollection = new DoorIteratorCollectionImpl(doors);
     }
 
     @Override
@@ -55,13 +59,11 @@ public class Room implements Actionable {
     public void execute(Action action) {
         action.accept(this);
 
-        LightIteratorCollection lightIteratorCollection = new LightIteratorCollectionImpl(lights);
         LightIterator lightIterator = lightIteratorCollection.createIterator(-1);
         while (lightIterator.hasMore()) {
             lightIterator.getNext().execute(action);
         }
 
-        DoorIteratorCollection doorIteratorCollection = new DoorIteratorCollectionImpl(doors);
         DoorIterator doorIterator = doorIteratorCollection.createIterator(-1);
         while (doorIterator.hasMore()) {
             doorIterator.getNext().execute(action);

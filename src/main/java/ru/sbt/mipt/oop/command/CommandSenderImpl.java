@@ -1,4 +1,7 @@
-package ru.sbt.mipt.oop;
+package ru.sbt.mipt.oop.command;
+
+import ru.sbt.mipt.oop.SensorCommand;
+import ru.sbt.mipt.oop.command.CommandSender;
 
 public class CommandSenderImpl implements CommandSender {
 

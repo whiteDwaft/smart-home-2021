@@ -1,8 +1,15 @@
 package ru.sbt.mipt.oop.handlers;
 
 import ru.sbt.mipt.oop.*;
+import ru.sbt.mipt.oop.command.CommandSender;
+import ru.sbt.mipt.oop.command.CommandSenderImpl;
+import ru.sbt.mipt.oop.command.CommandType;
+import ru.sbt.mipt.oop.elements.Door;
+import ru.sbt.mipt.oop.elements.Light;
+import ru.sbt.mipt.oop.elements.Room;
+import ru.sbt.mipt.oop.sensor.SensorEvent;
 
-import static ru.sbt.mipt.oop.SensorEventType.*;
+import static ru.sbt.mipt.oop.sensor.SensorEventType.*;
 
 public class HallDoorEventHandler implements EventHandler {
     private final CommandSender commandSender;

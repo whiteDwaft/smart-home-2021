@@ -1,5 +1,9 @@
 package ru.sbt.mipt.oop;
 
+import ru.sbt.mipt.oop.sensor.SensorEvent;
+import ru.sbt.mipt.oop.sensor.SensorEventGenerator;
+import ru.sbt.mipt.oop.sensor.SensorEventType;
+
 class DummyRandomEventGenerator implements SensorEventGenerator {
 
     @Override

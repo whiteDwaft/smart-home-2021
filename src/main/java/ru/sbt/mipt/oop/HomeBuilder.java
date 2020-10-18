@@ -1,6 +1,8 @@
 package ru.sbt.mipt.oop;
 
-import ru.sbt.mipt.oop.alarm.Signalization;
+import ru.sbt.mipt.oop.elements.Door;
+import ru.sbt.mipt.oop.elements.Light;
+import ru.sbt.mipt.oop.elements.Room;
 import ru.sbt.mipt.oop.output.FileWriter;
 import ru.sbt.mipt.oop.output.HomeUnloader;
 

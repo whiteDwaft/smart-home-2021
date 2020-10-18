@@ -7,26 +7,21 @@ public class SignalizationDisactivatedState extends SignalizationState {
     }
 
     @Override
-    public boolean setActivated(int PIN) {
+    public void setActivated(int PIN) {
         if (PIN == signalization.PIN) {
             signalization.changeState(new SignalizationActivatedState(signalization));
-            signalization.setActivated(true);
             System.out.println("ACTIVATED");
-            return true;
         }
         System.out.println("INVALID PIN");
-        return false;
     }
 
     @Override
-    public boolean setUnactivated(int PIN) {
+    public void setUnactivated(int PIN) {
         System.out.println("ALREADY UNACTIVATED");
-        return false;
     }
 
     @Override
-    public boolean switchAlarmOn() {
+    public void switchAlarmOn() {
         System.out.println("LOCKED");
-        return false;
     }
 }

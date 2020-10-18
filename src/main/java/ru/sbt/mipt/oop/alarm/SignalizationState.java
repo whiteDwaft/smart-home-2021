@@ -7,9 +7,9 @@ public abstract class SignalizationState {
         this.signalization = signalization;
     }
 
-    public abstract boolean setActivated(int PIN);
+    public abstract void setActivated(int PIN);
 
-    public abstract boolean setUnactivated(int PIN);
+    public abstract void setUnactivated(int PIN);
 
-    public abstract boolean switchAlarmOn();
+    public abstract void switchAlarmOn();
 }

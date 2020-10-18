@@ -7,26 +7,21 @@ public class SignalizationAlarmOnState extends SignalizationState {
     }
 
     @Override
-    public boolean setActivated(int PIN) {
+    public void setActivated(int PIN) {
         System.out.println("LOCKED");
-        return false;
     }
 
     @Override
-    public boolean setUnactivated(int PIN) {
+    public void setUnactivated(int PIN) {
         if (PIN == signalization.PIN) {
             signalization.changeState(new SignalizationDisactivatedState(signalization));
-            signalization.setActivated(false);
             System.out.println("UNACTIVATED");
-            return true;
         }
         System.out.println("INVALID PIN");
-        return false;
     }
 
     @Override
-    public boolean switchAlarmOn() {
+    public void switchAlarmOn() {
         System.out.println("ALREADY SWITCHED ON");
-        return false;
     }
 }

@@ -1,6 +1,6 @@
 package ru.sbt.mipt.oop.roomIterator;
 
-import ru.sbt.mipt.oop.Room;
+import ru.sbt.mipt.oop.elements.Room;
 
 import java.util.List;
 

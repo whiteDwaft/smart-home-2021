@@ -2,8 +2,12 @@ package ru.sbt.mipt.oop.handlers;
 
 import org.junit.jupiter.api.Test;
 import ru.sbt.mipt.oop.*;
+import ru.sbt.mipt.oop.elements.Light;
+import ru.sbt.mipt.oop.elements.Room;
 import ru.sbt.mipt.oop.input.FileReader;
 import ru.sbt.mipt.oop.input.HomeLoader;
+import ru.sbt.mipt.oop.sensor.SensorEvent;
+import ru.sbt.mipt.oop.sensor.SensorEventType;
 
 import java.io.IOException;
 

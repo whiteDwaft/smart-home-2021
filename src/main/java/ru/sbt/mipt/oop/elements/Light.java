@@ -1,8 +1,9 @@
-package ru.sbt.mipt.oop;
+package ru.sbt.mipt.oop.elements;
+
+import ru.sbt.mipt.oop.Action;
+import ru.sbt.mipt.oop.Actionable;
 
 import java.util.Objects;
-
-import static ru.sbt.mipt.oop.SensorEventType.LIGHT_ON;
 
 public class Light implements Actionable {
     private boolean isOn;

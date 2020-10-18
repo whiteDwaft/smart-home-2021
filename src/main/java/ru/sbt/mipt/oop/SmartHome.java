@@ -1,6 +1,7 @@
 package ru.sbt.mipt.oop;
 
 import ru.sbt.mipt.oop.alarm.Signalization;
+import ru.sbt.mipt.oop.elements.Room;
 import ru.sbt.mipt.oop.roomIterator.RoomIterator;
 import ru.sbt.mipt.oop.roomIterator.RoomIteratorCollection;
 import ru.sbt.mipt.oop.roomIterator.RoomIteratorCollectionImpl;
@@ -15,15 +16,18 @@ import java.util.Objects;
 public class SmartHome  implements Actionable {
     List<Room> rooms;
     private final int PIN;
+    private final RoomIteratorCollection roomIteratorCollection;
     private Signalization signalization;
 
     public SmartHome(int pin) {
         PIN = pin;
         rooms = new ArrayList<>();
+        roomIteratorCollection = new RoomIteratorCollectionImpl(rooms);
     }
 
     public SmartHome(List<Room> rooms,int PIN)
     {
+        roomIteratorCollection = new RoomIteratorCollectionImpl(rooms);
         this.rooms = rooms;
         this.PIN = PIN;
     }
@@ -55,10 +59,8 @@ public class SmartHome  implements Actionable {
 
     @Override
     public void execute(Action action) {
-
         action.accept(this);
 
-        RoomIteratorCollection roomIteratorCollection = new RoomIteratorCollectionImpl(rooms);
         RoomIterator roomIterator = roomIteratorCollection.createIterator(-1);
         while (roomIterator.hasMore())
         {

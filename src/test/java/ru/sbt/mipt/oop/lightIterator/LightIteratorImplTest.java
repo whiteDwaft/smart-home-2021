@@ -1,7 +1,7 @@
 package ru.sbt.mipt.oop.lightIterator;
 
 import org.junit.jupiter.api.Test;
-import ru.sbt.mipt.oop.Light;
+import ru.sbt.mipt.oop.elements.Light;
 
 import java.util.ArrayList;
 import java.util.List;
