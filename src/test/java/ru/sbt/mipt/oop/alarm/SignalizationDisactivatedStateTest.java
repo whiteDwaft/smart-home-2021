@@ -21,7 +21,9 @@ class SignalizationDisactivatedStateTest {
         smartHome.formSignalizationObj();
         EventHandler signalizationEventHandler = new DecorateEventHandler(new SignalizationEventHandler());
         SensorEvent event = new SensorEvent(SensorEventType.SIGNALIZATION_ACTIVATED,123);
-        boolean res = signalizationEventHandler.handle(event,smartHome);
+        signalizationEventHandler.handle(event,smartHome);
+        SignalizationState signalizationState = smartHome.getSignalization().getSignalizationState();
+        boolean res = signalizationState instanceof SignalizationActivatedState;
         assertTrue(res,"signalization must be  activated");
     }
 
@@ -32,7 +34,9 @@ class SignalizationDisactivatedStateTest {
         smartHome.formSignalizationObj();
         EventHandler signalizationEventHandler = new DecorateEventHandler(new SignalizationEventHandler());
         SensorEvent event = new SensorEvent(SensorEventType.SIGNALIZATION_DISACTIVATED,123);
-        boolean res = signalizationEventHandler.handle(event,smartHome);
+        signalizationEventHandler.handle(event,smartHome);
+        SignalizationState signalizationState = smartHome.getSignalization().getSignalizationState();
+        boolean res = signalizationState instanceof SignalizationActivatedState;
         assertFalse(res,"signalization must be already disactivated");
     }
 

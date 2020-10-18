@@ -23,7 +23,9 @@ class SignalizationAlarmOnStateTest {
         signalization.changeState(new SignalizationAlarmOnState(signalization));
         EventHandler signalizationEventHandler = new DecorateEventHandler(new SignalizationEventHandler());
         SensorEvent event = new SensorEvent(SensorEventType.SIGNALIZATION_ACTIVATED,123);
-        boolean res = signalizationEventHandler.handle(event,smartHome);
+        signalizationEventHandler.handle(event,smartHome);
+        SignalizationState signalizationState = signalization.getSignalizationState();
+        boolean res = signalizationState instanceof SignalizationActivatedState;
         assertFalse(res,"signalization must be already activated");
     }
 
@@ -36,7 +38,9 @@ class SignalizationAlarmOnStateTest {
         signalization.changeState(new SignalizationAlarmOnState(signalization));
         EventHandler signalizationEventHandler = new DecorateEventHandler(new SignalizationEventHandler());
         SensorEvent event = new SensorEvent(SensorEventType.SIGNALIZATION_DISACTIVATED,123);
-        boolean res = signalizationEventHandler.handle(event,smartHome);
+        signalizationEventHandler.handle(event,smartHome);
+        SignalizationState signalizationState = signalization.getSignalizationState();
+        boolean res = signalizationState instanceof SignalizationDisactivatedState;
         assertTrue(res,"signalization must be disactivated");
     }
 
@@ -49,7 +53,9 @@ class SignalizationAlarmOnStateTest {
         signalization.changeState(new SignalizationAlarmOnState(signalization));
         EventHandler signalizationEventHandler = new DecorateEventHandler(new SignalizationEventHandler());
         SensorEvent event = new SensorEvent(SensorEventType.SIGNALIZATION_DISACTIVATED,321);
-        boolean res = signalizationEventHandler.handle(event,smartHome);
+        signalizationEventHandler.handle(event,smartHome);
+        SignalizationState signalizationState = signalization.getSignalizationState();
+        boolean res = signalizationState instanceof SignalizationDisactivatedState;
         assertFalse(res,"Wrong PIN was entered");
     }
 }

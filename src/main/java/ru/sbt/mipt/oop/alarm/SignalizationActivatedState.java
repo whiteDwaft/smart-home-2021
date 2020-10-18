@@ -17,8 +17,9 @@ public class SignalizationActivatedState extends SignalizationState {
         if (PIN == signalization.PIN) {
             signalization.changeState(new SignalizationDisactivatedState(signalization));
             System.out.println("UNACTIVATED");
+        } else {
+            switchAlarmOn();
         }
-        switchAlarmOn();
     }
 
     @Override
