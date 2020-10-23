@@ -5,10 +5,10 @@ import ru.sbt.mipt.oop.sensor.SensorEventType;
 import ru.sbt.mipt.oop.SmartHome;
 import ru.sbt.mipt.oop.alarm.SignalizationActivatedState;
 
-public class DecorateEventHandler implements EventHandler {
+public class AlarmDecorator implements EventHandler {
     private final EventHandler eventHandler;
 
-    public DecorateEventHandler(EventHandler eventHandler) {
+    public AlarmDecorator(EventHandler eventHandler) {
         this.eventHandler = eventHandler;
     }
 

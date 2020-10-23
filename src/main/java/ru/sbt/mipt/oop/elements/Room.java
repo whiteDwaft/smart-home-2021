@@ -33,14 +33,6 @@ public class Room implements Actionable {
         return Objects.hash(lights, doors, name);
     }
 
-    public Collection<Light> getLights() {
-        return lights;
-    }
-
-    public Collection<Door> getDoors() {
-        return doors;
-    }
-
     public String getName() {
         return name;
     }

@@ -1,15 +1,16 @@
 package ru.sbt.mipt.oop.alarm;
 
-public class SignalizationDisactivatedState extends SignalizationState {
+public class SignalizationDisactivatedState implements SignalizationState {
+    private final Signalization signalization;
     private String s = "disactivated";
 
     SignalizationDisactivatedState(Signalization alarm) {
-        super(alarm);
+        this.signalization = alarm;
     }
 
     @Override
     public void setActivated(int PIN) {
-        if (PIN == signalization.PIN) {
+        if (PIN == signalization.pin) {
             signalization.changeState(new SignalizationActivatedState(signalization));
             System.out.println("ACTIVATED");
         } else {

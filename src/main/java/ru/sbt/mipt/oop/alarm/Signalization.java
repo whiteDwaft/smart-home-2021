@@ -2,13 +2,11 @@ package ru.sbt.mipt.oop.alarm;
 
 public class Signalization {
     private SignalizationState signalizationState;
-//    private boolean isActivated;
-    final int PIN;
-
+    final int pin;
 
     public Signalization(int PIN) {
         signalizationState = new SignalizationDisactivatedState(this);
-        this.PIN = PIN;
+        this.pin = PIN;
     }
 
     public SignalizationState getSignalizationState() {

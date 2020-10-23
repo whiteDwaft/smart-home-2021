@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import ru.sbt.mipt.oop.sensor.SensorEvent;
 import ru.sbt.mipt.oop.sensor.SensorEventType;
 import ru.sbt.mipt.oop.SmartHome;
-import ru.sbt.mipt.oop.handlers.DecorateEventHandler;
+import ru.sbt.mipt.oop.handlers.AlarmDecorator;
 import ru.sbt.mipt.oop.handlers.EventHandler;
 import ru.sbt.mipt.oop.handlers.SignalizationEventHandler;
 import ru.sbt.mipt.oop.input.FileReader;
@@ -21,7 +21,7 @@ class SignalizationAlarmOnStateTest {
         smartHome.formSignalizationObj();
         Signalization signalization = smartHome.getSignalization();
         signalization.changeState(new SignalizationAlarmOnState(signalization));
-        EventHandler signalizationEventHandler = new DecorateEventHandler(new SignalizationEventHandler());
+        EventHandler signalizationEventHandler = new AlarmDecorator(new SignalizationEventHandler());
         SensorEvent event = new SensorEvent(SensorEventType.SIGNALIZATION_ACTIVATED,123);
         signalizationEventHandler.handle(event,smartHome);
         SignalizationState signalizationState = signalization.getSignalizationState();
@@ -36,7 +36,7 @@ class SignalizationAlarmOnStateTest {
         smartHome.formSignalizationObj();
         Signalization signalization = smartHome.getSignalization();
         signalization.changeState(new SignalizationAlarmOnState(signalization));
-        EventHandler signalizationEventHandler = new DecorateEventHandler(new SignalizationEventHandler());
+        EventHandler signalizationEventHandler = new AlarmDecorator(new SignalizationEventHandler());
         SensorEvent event = new SensorEvent(SensorEventType.SIGNALIZATION_DISACTIVATED,123);
         signalizationEventHandler.handle(event,smartHome);
         SignalizationState signalizationState = signalization.getSignalizationState();
@@ -51,7 +51,7 @@ class SignalizationAlarmOnStateTest {
         smartHome.formSignalizationObj();
         Signalization signalization = smartHome.getSignalization();
         signalization.changeState(new SignalizationAlarmOnState(signalization));
-        EventHandler signalizationEventHandler = new DecorateEventHandler(new SignalizationEventHandler());
+        EventHandler signalizationEventHandler = new AlarmDecorator(new SignalizationEventHandler());
         SensorEvent event = new SensorEvent(SensorEventType.SIGNALIZATION_DISACTIVATED,321);
         signalizationEventHandler.handle(event,smartHome);
         SignalizationState signalizationState = signalization.getSignalizationState();

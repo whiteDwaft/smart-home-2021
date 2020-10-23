@@ -1,15 +1,10 @@
 package ru.sbt.mipt.oop.alarm;
 
-public abstract class SignalizationState {
-    final Signalization signalization;
+public interface SignalizationState {
 
-    SignalizationState(Signalization signalization) {
-        this.signalization = signalization;
-    }
+    void setActivated(int PIN);
 
-    public abstract void setActivated(int PIN);
+    void setUnactivated(int PIN);
 
-    public abstract void setUnactivated(int PIN);
-
-    public abstract void switchAlarmOn();
+    void switchAlarmOn();
 }

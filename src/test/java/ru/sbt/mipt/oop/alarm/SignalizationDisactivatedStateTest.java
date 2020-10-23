@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import ru.sbt.mipt.oop.sensor.SensorEvent;
 import ru.sbt.mipt.oop.sensor.SensorEventType;
 import ru.sbt.mipt.oop.SmartHome;
-import ru.sbt.mipt.oop.handlers.DecorateEventHandler;
+import ru.sbt.mipt.oop.handlers.AlarmDecorator;
 import ru.sbt.mipt.oop.handlers.EventHandler;
 import ru.sbt.mipt.oop.handlers.SignalizationEventHandler;
 import ru.sbt.mipt.oop.input.FileReader;
@@ -19,7 +19,7 @@ class SignalizationDisactivatedStateTest {
         HomeLoader homeLoader = new FileReader("smart-home-1.js");
         SmartHome smartHome = homeLoader.loadFromFile();
         smartHome.formSignalizationObj();
-        EventHandler signalizationEventHandler = new DecorateEventHandler(new SignalizationEventHandler());
+        EventHandler signalizationEventHandler = new AlarmDecorator(new SignalizationEventHandler());
         SensorEvent event = new SensorEvent(SensorEventType.SIGNALIZATION_ACTIVATED,123);
         signalizationEventHandler.handle(event,smartHome);
         SignalizationState signalizationState = smartHome.getSignalization().getSignalizationState();
@@ -32,7 +32,7 @@ class SignalizationDisactivatedStateTest {
         HomeLoader homeLoader = new FileReader("smart-home-1.js");
         SmartHome smartHome = homeLoader.loadFromFile();
         smartHome.formSignalizationObj();
-        EventHandler signalizationEventHandler = new DecorateEventHandler(new SignalizationEventHandler());
+        EventHandler signalizationEventHandler = new AlarmDecorator(new SignalizationEventHandler());
         SensorEvent event = new SensorEvent(SensorEventType.SIGNALIZATION_DISACTIVATED,123);
         signalizationEventHandler.handle(event,smartHome);
         SignalizationState signalizationState = smartHome.getSignalization().getSignalizationState();

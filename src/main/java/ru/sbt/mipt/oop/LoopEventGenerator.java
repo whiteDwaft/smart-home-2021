@@ -1,5 +1,6 @@
 package ru.sbt.mipt.oop;
 
+import ru.sbt.mipt.oop.handlers.AlarmDecorator;
 import ru.sbt.mipt.oop.handlers.EventHandler;
 import ru.sbt.mipt.oop.sensor.SensorEvent;
 import ru.sbt.mipt.oop.sensor.SensorEventGenerator;
@@ -20,7 +21,10 @@ public class LoopEventGenerator {
         SensorEvent event = sensorEventGenerator.getNextSensorEvent();
         while (event != null){
             SensorEvent finalEvent = event;
-            eventHandlers.forEach(it -> it.handle(finalEvent,smartHome));
+            for(EventHandler it:eventHandlers){
+                EventHandler eventHandler = new AlarmDecorator(it);
+                eventHandler.handle(finalEvent,smartHome);
+            }
             event = sensorEventGenerator.getNextSensorEvent();
         }
     }
