@@ -22,8 +22,8 @@ public class LoopEventGenerator {
         while (event != null){
             SensorEvent finalEvent = event;
             for(EventHandler it:eventHandlers){
-                EventHandler eventHandler = new AlarmDecorator(it);
-                eventHandler.handle(finalEvent,smartHome);
+//                EventHandler eventHandler = new AlarmDecorator(it);
+//                eventHandler.handle(finalEvent,smartHome);
             }
             event = sensorEventGenerator.getNextSensorEvent();
         }

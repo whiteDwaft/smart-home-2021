@@ -1,5 +1,8 @@
 package ru.sbt.mipt.oop;
 
+import com.coolcompany.smarthome.events.SensorEventsManager;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
 import ru.sbt.mipt.oop.handlers.DoorEventHandler;
 import ru.sbt.mipt.oop.handlers.HallDoorEventHandler;
 import ru.sbt.mipt.oop.handlers.LightEventHandler;
@@ -24,13 +27,17 @@ public class Application {
     }
 
     public static void main(String... args) throws IOException {
-        Application application = new Application(new FileReader("smart-home-1.js"),
-                new LoopEventGenerator(new DummyRandomEventGenerator(), Arrays.asList(new DoorEventHandler(), new LightEventHandler(), new HallDoorEventHandler())));
-        application.smartHome = application.homeLoader.loadFromFile();
-        application.run();
-    }
+        AbstractApplicationContext context = new AnnotationConfigApplicationContext(AppConfiguration.class);
+        SensorEventsManager sensorEventsManager = context.getBean(SensorEventsManager.class);
+        sensorEventsManager.start();
 
-    public void run() {
-        simulating.simulating(smartHome);
+//        Application application = new Application(new FileReader("smart-home-1.js"),
+//                new LoopEventGenerator(new DummyRandomEventGenerator(), Arrays.asList(new DoorEventHandler(), new LightEventHandler(), new HallDoorEventHandler())));
+//        application.smartHome = application.homeLoader.loadFromFile();
+//        application.run();
+//    }
+//
+//    public void run() {
+//        simulating.simulating(smartHome);
     }
 }

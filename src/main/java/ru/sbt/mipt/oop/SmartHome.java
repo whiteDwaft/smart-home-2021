@@ -10,7 +10,7 @@ import java.util.Objects;
 
 //хотел добавть в SmartHome объект Signalisation, но при формировании объекта через JSON происходит StackOverflow
 //(Signalization ссылвется на SignalizationState, а SignalizationState ссылается на Signalization (циклическая ссылка))
-public class SmartHome  implements Actionable {
+public class SmartHome implements Actionable {
     List<Room> rooms;
     private final int PIN;
     private Signalization signalization;
@@ -20,8 +20,7 @@ public class SmartHome  implements Actionable {
         rooms = new ArrayList<>();
     }
 
-    public SmartHome(List<Room> rooms,int PIN)
-    {
+    public SmartHome(List<Room> rooms, int PIN) {
         this.rooms = rooms;
         this.PIN = PIN;
     }
@@ -29,7 +28,8 @@ public class SmartHome  implements Actionable {
     public Signalization getSignalization() {
         return signalization;
     }
-        public void formSignalizationObj(){
+
+    public void formSignalizationObj() {
         signalization = new Signalization(PIN);
     }
 

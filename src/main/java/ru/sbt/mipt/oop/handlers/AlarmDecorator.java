@@ -5,11 +5,13 @@ import ru.sbt.mipt.oop.sensor.SensorEventType;
 import ru.sbt.mipt.oop.SmartHome;
 import ru.sbt.mipt.oop.alarm.SignalizationActivatedState;
 
-public class AlarmDecorator implements EventHandler {
-    private final EventHandler eventHandler;
+import java.util.List;
 
-    public AlarmDecorator(EventHandler eventHandler) {
-        this.eventHandler = eventHandler;
+public class AlarmDecorator implements EventHandler {
+    private final List<EventHandler> eventHandlers;
+
+    public AlarmDecorator(List<EventHandler> eventHandler) {
+        this.eventHandlers = eventHandler;
     }
 
     @Override
@@ -18,7 +20,7 @@ public class AlarmDecorator implements EventHandler {
         sensorEvent.getType() != SensorEventType.SIGNALIZATION_DISACTIVATED)) {
             smartHome.getSignalization().getSignalizationState().switchAlarmOn();
         } else {
-            eventHandler.handle(sensorEvent,smartHome);
+            eventHandlers.forEach(handler -> handler.handle(sensorEvent,smartHome));
         }
     }
 }
