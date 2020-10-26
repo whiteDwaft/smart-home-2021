@@ -9,11 +9,19 @@ public class Signalization {
         this.pin = PIN;
     }
 
+    public void setActivated(int pin) {
+        getSignalizationState().setActivated(pin);
+    }
+
+    public void setUnActivated(int pin) {
+        getSignalizationState().setUnactivated(pin);
+    }
+
     public SignalizationState getSignalizationState() {
         return signalizationState;
     }
 
-    public void changeState(SignalizationState signalizationState){
+    public void changeState(SignalizationState signalizationState) {
         this.signalizationState = signalizationState;
     }
 }

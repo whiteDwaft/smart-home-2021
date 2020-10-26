@@ -27,6 +27,5 @@ public class SignalizationActivatedState implements SignalizationState {
     public void switchAlarmOn() {
         signalization.changeState(new SignalizationAlarmOnState(signalization));
         System.out.println("ALARM_ON");
-        System.out.println("Sending sms");
     }
 }

@@ -8,9 +8,9 @@ public class SignalizationEventHandler implements EventHandler {
     @Override
     public void handle(SensorEvent sensorEvent, SmartHome smartHome) {
         if (sensorEvent.getType() == SensorEventType.SIGNALIZATION_ACTIVATED) {
-            smartHome.getSignalization().getSignalizationState().setActivated(sensorEvent.getPIN());
+            smartHome.getSignalization().setActivated(sensorEvent.getPIN());
         } else if(sensorEvent.getType() == SensorEventType.SIGNALIZATION_DISACTIVATED){
-            smartHome.getSignalization().getSignalizationState().setUnactivated(sensorEvent.getPIN());
+            smartHome.getSignalization().setUnActivated(sensorEvent.getPIN());
         }
     }
 }
