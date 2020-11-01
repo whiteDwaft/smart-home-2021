@@ -26,6 +26,5 @@ public class SignalizationAlarmOnState implements SignalizationState {
     @Override
     public void switchAlarmOn() {
         System.out.println("ALREADY SWITCHED ON");
-        System.out.println("Sending sms");
     }
 }

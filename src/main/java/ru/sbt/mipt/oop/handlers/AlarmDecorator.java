@@ -19,6 +19,7 @@ public class AlarmDecorator implements EventHandler {
         if (smartHome.getSignalization().getSignalizationState().getClass() == SignalizationActivatedState.class && (sensorEvent.getType() != SensorEventType.SIGNALIZATION_ACTIVATED &&
         sensorEvent.getType() != SensorEventType.SIGNALIZATION_DISACTIVATED)) {
             smartHome.getSignalization().getSignalizationState().switchAlarmOn();
+            System.out.println("Sending sms");
         } else {
             eventHandlers.forEach(handler -> handler.handle(sensorEvent,smartHome));
         }
