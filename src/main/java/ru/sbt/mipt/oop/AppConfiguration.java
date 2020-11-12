@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 import ru.sbt.mipt.oop.api.ApiAdapter;
+import ru.sbt.mipt.oop.api.Conventor;
 import ru.sbt.mipt.oop.handlers.*;
 
 import ru.sbt.mipt.oop.input.FileReader;
@@ -22,9 +23,9 @@ import java.util.Map;
 public class AppConfiguration {
 
     @Bean
-    public SensorEventsManager getSensorEventsManager(List<EventHandler> eventHandler,
+    public SensorEventsManager SensorEventsManager(List<EventHandler> eventHandler,
                                                       SmartHome smartHome,
-                                                      Map<String, SensorEventType> convertor){
+                                                      Conventor convertor){
 
         smartHome.formSignalizationObj();
         SensorEventsManager sensorEventsManager = new SensorEventsManager();
@@ -37,41 +38,41 @@ public class AppConfiguration {
     }
 
     @Bean
-    public SmartHome getSmartHome(HomeLoader homeLoader) {
+    public SmartHome SmartHome(HomeLoader homeLoader) {
         return homeLoader.loadFromFile();
     }
 
     @Bean
-    public HomeLoader getHomeLoader(@Value("${filename}") String fileName){
+    public HomeLoader HomeLoader(@Value("${filename}") String fileName){
         return new FileReader(fileName);
     }
 
     @Bean
-    public Map<String,SensorEventType> getConvertor(){
-        return new HashMap<String, SensorEventType>() {{
+    public Conventor Convertor(){
+        return new Conventor(new HashMap<String, SensorEventType>() {{
             put("LightIsOn", SensorEventType.LIGHT_ON);
             put("LightIsOff", SensorEventType.LIGHT_OFF);
             put("DoorIsOpen", SensorEventType.DOOR_OPEN);
             put("DoorIsClosed", SensorEventType.DOOR_CLOSED);
-        }};
+        }});
     }
     @Bean
-    EventHandler getDoorEventHandler() {
+    EventHandler DoorEventHandler() {
         return new DoorEventHandler();
     }
 
     @Bean
-    EventHandler getLightEventHandler() {
+    EventHandler LightEventHandler() {
         return new LightEventHandler();
     }
 
     @Bean
-    EventHandler getSignalizationEventHandler() {
+    EventHandler SignalizationEventHandler() {
         return new SignalizationEventHandler();
     }
 
     @Bean
-    EventHandler getHallDoorEventHandler(){
+    EventHandler HallDoorEventHandler(){
         return new HallDoorEventHandler();
     }
 }
