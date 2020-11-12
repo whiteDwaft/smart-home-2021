@@ -11,10 +11,10 @@ import java.util.Map;
 public class ApiAdapter implements EventHandler {
     private final ru.sbt.mipt.oop.handlers.EventHandler eventHandler;
     private final SmartHome smartHome;
-    private final Map<String, SensorEventType> conventor;
+    private final Conventor conventor;
 
 
-    public ApiAdapter(ru.sbt.mipt.oop.handlers.EventHandler eventHandler, SmartHome smartHome, Map<String, SensorEventType> conventor) {
+    public ApiAdapter(ru.sbt.mipt.oop.handlers.EventHandler eventHandler, SmartHome smartHome, Conventor conventor) {
         this.eventHandler = eventHandler;
         this.smartHome = smartHome;
         this.conventor = conventor;
@@ -23,8 +23,12 @@ public class ApiAdapter implements EventHandler {
     @Override
     public void handleEvent(CCSensorEvent ccSensorEvent) {
 
-        SensorEvent sensorEvent = new SensorEvent(conventor.get(ccSensorEvent.getEventType()),ccSensorEvent.getObjectId());
-        eventHandler.handle(sensorEvent,smartHome);
+        SensorEventType type = conventor.convertFromEventType(ccSensorEvent.getEventType());
+        if (type == null){
+            return;
+        }
+        SensorEvent sensorEvent = new SensorEvent(type, ccSensorEvent.getObjectId());
+        eventHandler.handle(sensorEvent, smartHome);
 
     }
 }
