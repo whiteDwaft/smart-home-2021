@@ -30,14 +30,5 @@ public class Application {
         AbstractApplicationContext context = new AnnotationConfigApplicationContext(AppConfiguration.class);
         SensorEventsManager sensorEventsManager = context.getBean(SensorEventsManager.class);
         sensorEventsManager.start();
-
-//        Application application = new Application(new FileReader("smart-home-1.js"),
-//                new LoopEventGenerator(new DummyRandomEventGenerator(), Arrays.asList(new DoorEventHandler(), new LightEventHandler(), new HallDoorEventHandler())));
-//        application.smartHome = application.homeLoader.loadFromFile();
-//        application.run();
-//    }
-//
-//    public void run() {
-//        simulating.simulating(smartHome);
     }
 }

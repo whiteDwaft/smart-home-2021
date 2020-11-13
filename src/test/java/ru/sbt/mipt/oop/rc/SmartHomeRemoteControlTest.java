@@ -11,14 +11,14 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class RemoteControl1Test {
+class SmartHomeRemoteControlTest {
 
     @Test
     void onButtonPressed_whenRcIdOfRemoteControlNotEqualRcIdOfOnButtonPressed() {
         HomeLoader homeLoader = new FileReader("smart-home-1.js");
         SmartHome smartHome = homeLoader.loadFromFile();
         smartHome.formSignalizationObj();
-        RemoteControl remoteControl = new RemoteControl1(getrcDescriptor(
+        RemoteControl remoteControl = new SmartHomeRemoteControl(getrcDescriptor(
                 new ActivateSignalizationCommand(smartHome),
                 new AlarmOnCommand(smartHome),
                 new CloseHallDoorCommand(smartHome),

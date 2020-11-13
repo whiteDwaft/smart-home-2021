@@ -11,7 +11,7 @@ import ru.sbt.mipt.oop.handlers.*;
 import ru.sbt.mipt.oop.input.FileReader;
 import ru.sbt.mipt.oop.input.HomeLoader;
 import ru.sbt.mipt.oop.rc.RemoteControl;
-import ru.sbt.mipt.oop.rc.RemoteControl1;
+import ru.sbt.mipt.oop.rc.SmartHomeRemoteControl;
 import ru.sbt.mipt.oop.rc.RemoteControlRegistry;
 import ru.sbt.mipt.oop.rccommands.*;
 import ru.sbt.mipt.oop.sensor.SensorEventType;
@@ -25,7 +25,7 @@ import java.util.Map;
 public class AppConfiguration {
 
     @Bean
-    public SensorEventsManager getSensorEventsManager(List<EventHandler> eventHandler,
+    public SensorEventsManager SensorEventsManager(List<EventHandler> eventHandler,
                                                       SmartHome smartHome,
                                                       Map<String, SensorEventType> convertor) {
 
@@ -40,19 +40,19 @@ public class AppConfiguration {
     }
 
     @Bean
-    public SmartHome getSmartHome(HomeLoader homeLoader) {
+    public SmartHome SmartHome(HomeLoader homeLoader) {
         SmartHome smartHome = homeLoader.loadFromFile();
         smartHome.formSignalizationObj();
         return smartHome;
     }
 
     @Bean
-    public HomeLoader getHomeLoader(@Value("${filename}") String fileName) {
+    public HomeLoader HomeLoader(@Value("${filename}") String fileName) {
         return new FileReader(fileName);
     }
 
     @Bean
-    public Map<String, SensorEventType> getConvertor() {
+    public Map<String, SensorEventType> Convertor() {
         return new HashMap<String, SensorEventType>() {{
             put("LightIsOn", SensorEventType.LIGHT_ON);
             put("LightIsOff", SensorEventType.LIGHT_OFF);
@@ -62,57 +62,57 @@ public class AppConfiguration {
     }
 
     @Bean
-    EventHandler getDoorEventHandler() {
+    EventHandler DoorEventHandler() {
         return new DoorEventHandler();
     }
 
     @Bean
-    EventHandler getLightEventHandler() {
+    EventHandler LightEventHandler() {
         return new LightEventHandler();
     }
 
     @Bean
-    EventHandler getSignalizationEventHandler() {
+    EventHandler SignalizationEventHandler() {
         return new SignalizationEventHandler();
     }
 
     @Bean
-    EventHandler getHallDoorEventHandler() {
+    EventHandler HallDoorEventHandler() {
         return new HallDoorEventHandler();
     }
 
     @Bean
-    RCCommand getActivateSignalizationCommand(SmartHome smartHome) {
+    RCCommand ActivateSignalizationCommand(SmartHome smartHome) {
         return new ActivateSignalizationCommand(smartHome);
     }
 
     @Bean
-    RCCommand getAlarmOnCommand(SmartHome smartHome) {
+    RCCommand AlarmOnCommand(SmartHome smartHome) {
         return new AlarmOnCommand(smartHome);
     }
 
     @Bean
-    RCCommand getCloseHallDoorCommand(SmartHome smartHome) {
+    RCCommand CloseHallDoorCommand(SmartHome smartHome) {
         return new CloseHallDoorCommand(smartHome);
     }
 
     @Bean
-    RCCommand getSwitchOffAllLightCommand(SmartHome smartHome) {
+    RCCommand SwitchOffAllLightCommand(SmartHome smartHome) {
         return new SwitchOffAllLightCommand(smartHome);
     }
 
     @Bean
-    RCCommand getSwitchOffHallLightCommand(SmartHome smartHome) {
+    RCCommand SwitchOffHallLightCommand(SmartHome smartHome) {
         return new SwitchOffHallLightCommand(smartHome);
     }
 
     @Bean
-    RCCommand getSwitchOnAllLightCommand(SmartHome smartHome) {
+    RCCommand SwitchOnAllLightCommand(SmartHome smartHome) {
         return new SwitchOnAllLightCommand(smartHome);
     }
 
     @Bean
-    Map<String, RCCommand> getrcDescriptor(
+    Map<String, RCCommand> rcDescriptor(
             RCCommand ActivateSignalizationCommand,
             RCCommand AlarmOnCommand,
             RCCommand CloseHallDoorCommand,
@@ -131,12 +131,12 @@ public class AppConfiguration {
     }
 
     @Bean
-    RemoteControl getRemoteControl(Map<String, RCCommand> rcDescriptor,String rcid){
-        return new RemoteControl1(rcDescriptor, rcid);
+    RemoteControl RemoteControl(Map<String, RCCommand> rcDescriptor,String rcid){
+        return new SmartHomeRemoteControl(rcDescriptor, rcid);
     }
 
     @Bean
-    RemoteControlRegistry getRemoteControlRegistry(List<RemoteControl1> remoteControlList){
+    RemoteControlRegistry RemoteControlRegistry(List<SmartHomeRemoteControl> remoteControlList){
         RemoteControlRegistry remoteControlRegistry = new RemoteControlRegistry();
         remoteControlList.forEach(remoteControl -> remoteControlRegistry.registerRemoteControl(remoteControl,remoteControl.getRcid()));
         return remoteControlRegistry;

@@ -4,7 +4,7 @@ import ru.sbt.mipt.oop.rccommands.RCCommand;
 
 import java.util.Map;
 
-public class RemoteControl1 implements RemoteControl {
+public class SmartHomeRemoteControl implements RemoteControl {
     private final Map<String, RCCommand> rcDescriptor;
     private final String rcid;
 
@@ -12,7 +12,7 @@ public class RemoteControl1 implements RemoteControl {
         return rcid;
     }
 
-    public RemoteControl1(Map<String, RCCommand> rcDescriptor, String rcid) {
+    public SmartHomeRemoteControl(Map<String, RCCommand> rcDescriptor, String rcid) {
         this.rcDescriptor = rcDescriptor;
         this.rcid = rcid;
     }
